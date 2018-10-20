@@ -1,0 +1,22 @@
+body{
+	background-color: rgba(240, 112, 106, 1);
+}
+p{
+	
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	font-family: 'Roboto', sans-serif;
+	margin-left: auto;
+	margin-right: auto;
+}
+.fluid{
+	font-size: 17vw;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+.next{
+	padding-top: 0px;
+	font-size: 5vw;
+	margin-top: 0px;
+}

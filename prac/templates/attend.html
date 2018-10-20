@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title></title>
+	<style type="text/css">
+		.container{
+		margin-top: 2%;
+		}
+		html{
+			height: 100%;
+		}
+		body{
+			height: 100%;
+			margin: 0;
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: sans-serif;
+	font-weight: 100;
+		}
+		::-webkit-input-placeholder {
+			text-align: center;
+		}
+		:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+		input{
+			border-radius: 25px;
+			width : 40%;
+			height: 25px;
+
+		}
+		input[type$="submit"]{
+			width: 20%;
+		}
+		.title{
+			color: rgb(245,235,245);
+		text-align:  center;
+		}
+		@media screen and (max-width: 900px){
+			input{
+			border-radius: 25px;
+			width : 60%;
+			height: 25px;
+
+		}
+		input[type$="submit"]{
+			width: 30%;
+		}
+		.title{
+			color: rgb(245,235,245);
+		text-align:  center;
+		}
+		body,html{
+			height: 100%;
+		}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="title">
+	<h1>Welcome</h1>
+	<p>Please use your erp credentials</p>
+	</div>
+	<div></div>
+	<div class="container" align="center">
+<form  method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+    	</div>
+
+</form>
+</body>
+</html>
