@@ -5,8 +5,8 @@ function(){
 	ip = $(location).attr('href').replace('/post/login/','');
 	str ='<div class="loader" hidden> <div class="cssload-container">	<div class="cssload-shaft1"></div>	<div class="cssload-shaft2"></div>	<div class="cssload-shaft3"></div>	<div class="cssload-shaft4"></div>	<div class="cssload-shaft5"></div>	<div class="cssload-shaft6"></div>	<div class="cssload-shaft7"></div>	<div class="cssload-shaft8"></div><div class="cssload-shaft9"></div><div class="cssload-shaft10"></div></div></div><div id="addText"></div>'
 var person = {
-		'regid' : $('div')[0].getAttribute('value'),
-		'passw' : $('div')[1].getAttribute('value'),
+		'regid' : regid,
+		'passw' : passw,
 	}
 $.ajax(
 {
@@ -40,8 +40,8 @@ $.ajax(
 
 	);
 var person2 = {
-	'mood_reg' : $('div')[2].getAttribute('value'),
-'mood_passw' : $('div')[3].getAttribute('value')
+	'mood_reg' : mood_reg,
+'mood_passw' : mood_passw
 }
 $.ajax({
 	url: ip+"/post/api/moodle/",

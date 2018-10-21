@@ -2,13 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" type="text/css" href="{% static "login.css" %}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">var	regid = '{{ request.session.regid }}';
+var	passw ='{{ request.session.passw }}';
+var mood_reg= '{{ request.session.mood_reg }}';
+var mood_passw = "{{ request.session.mood_passw }}"</script>
 <script type="text/javascript" src="{% static "login.js" %}">
-	
+
 </script>
 
 	<title>Hi</title>
@@ -16,17 +20,14 @@
 </head>
 
 <body >
-	<div value="{{ request.session.regid }}"  ></div>
-	<div value="{{ request.session.passw }}" ></div>
-	<div value="{{ request.session.mood_reg }}" ></div>
-	<div value="{{ request.session.mood_passw }}"></div>
+
 
 	<div class="cent">
 	<h2 class="greet"></h2>
 </div>
 			<div id="attend" class="cssload-container" hidden="">	<div class="cssload-shaft1"></div>	<div class="cssload-shaft2"></div>	<div class="cssload-shaft3"></div>	<div class="cssload-shaft4"></div>	<div class="cssload-shaft5"></div>	<div class="cssload-shaft6"></div>	<div class="cssload-shaft7"></div>	<div class="cssload-shaft8"></div><div class="cssload-shaft9"></div><div class="cssload-shaft10"></div></div>
 		<div id="container" class="cent">
-		
+
 		</div>
 <h3>
 </h3>

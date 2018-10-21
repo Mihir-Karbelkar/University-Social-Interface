@@ -9,14 +9,20 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from selenium.webdriver.support import expected_conditions as EC
-
+from sys import platform
 wrong_url = r'http://app.myvitbhopal.ac.in/corecampus/index.php?errormessage=Invalid+Username+or+Password.Please+try+again.'
 
 #----selenium
 cookie = []
 #------/selenium
+if platform=="linux" or platform=="linux2":
+	path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver_linux64/chromedriver'
+elif platform=="win32":
+	path = 	path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver_win32/chromedriver.exe'
+elif platform=='darwin':
+	path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver_mac64/chromedriver'
 
-path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver'
+
 def feedback():
 	br.set_cookiejar(cookie)
 	br.open("http://app.myvitbhopal.ac.in/corecampus/student/subjects/mycontents.php")
