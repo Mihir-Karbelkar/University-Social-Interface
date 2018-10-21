@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django_ajax.decorators import ajax
 from django.http import HttpResponse, HttpResponseRedirect
 from random import randint
 import json
@@ -59,6 +58,3 @@ def apimoodle(request):
     else:
         dic = None
     return JsonResponse(dic,safe=False)
-
-
-

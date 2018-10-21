@@ -1,5 +1,5 @@
 from selenium import webdriver
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import Select, WebDriverWait
 import selenium.webdriver.support.expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
@@ -8,21 +8,30 @@ import pickle
 import os
 import json
 cookie =[]
+path=os.path.dirname(os.path.realpath(__file__))+'/chromedriver'
 def moodle(username, password):
 	global cookie
 	opt = webdriver.ChromeOptions()
 	opt.add_argument("--incognito")
 	prefs = {"profile.managed_default_content_settings.stylesheet":2,"Javascript.enabled": False}
 	opt.add_experimental_option("prefs",prefs)
-	driver = webdriver.Chrome(options=opt)
-	driver.get('http://moodle.vitbhopal.ac.in/login/index.php')
-	url= driver.current_url
-	driver.find_element_by_name('username').send_keys(username)
-	driver.find_element_by_name('password').send_keys(password)
-	driver.find_element_by_id('loginbtn').click()
+	driver = webdriver.Chrome(executable_path=path,options=opt)
+	try:
+		driver.get('http://moodle.vitbhopal.ac.in/login/index.php')
+
+		url= driver.current_url
+		driver.find_element_by_name('username').send_keys(username)
+		driver.find_element_by_name('password').send_keys(password)
+		driver.find_element_by_id('loginbtn').click()
+	except:
+		driver.refresh()
+		url= driver.current_url
+		driver.find_element_by_name('username').send_keys(username)
+		driver.find_element_by_name('password').send_keys(password)
+		driver.find_element_by_id('loginbtn').click()	
 	if url==driver.current_url:
 		return "failed"
-	
+
 	cookie = driver.get_cookies()
 	pickle.dump(driver.get_cookies(), open(os.path.join("login/data/")+username+"_cook_mood.pkl", "wb"))
 	events = []
@@ -61,14 +70,15 @@ def moodle(username, password):
 	if not text:
 		isimp="NO"
 	driver.close()
-	
+
 	return {'events':isEvent, 'text' : text,'links' : links, 'date' : date, 'temp' : temp,'temp1' : temp1 , 'name' : user[0].text.split(" ")[0].capitalize(), 'isimp':isimp}
 def assign(string, user , passw):
 	opt = webdriver.ChromeOptions()
 	opt.add_argument("--incognito")
 	prefs = {"profile.managed_default_content_settings.stylesheet":2}
 	opt.add_experimental_option("prefs",prefs)
-	driver = webdriver.Chrome(options=opt)
+
+	driver = webdriver.Chrome(executable_path=path,options=opt)
 	driver.get(string)
 	url= driver.current_url
 	driver.find_element_by_name('username').send_keys(user)
@@ -82,14 +92,10 @@ def assign(string, user , passw):
 	rightSide=[]
 	for i in oldleftSide[:4]:
 		leftSide.append(i.text)
-	
-	
+
+
 	for i in oldrightSide[:4]:
 		rightSide.append(i.text)
-	
+
 	driver.close()
 	return {"leftSide":leftSide,"rightSide":rightSide}
-
-
-
-

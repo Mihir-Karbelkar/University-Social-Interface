@@ -1,6 +1,8 @@
 
 $(document).ready(
+
 function(){
+	ip = $(location).attr('href').replace('/post/login/','');
 	str ='<div class="loader" hidden> <div class="cssload-container">	<div class="cssload-shaft1"></div>	<div class="cssload-shaft2"></div>	<div class="cssload-shaft3"></div>	<div class="cssload-shaft4"></div>	<div class="cssload-shaft5"></div>	<div class="cssload-shaft6"></div>	<div class="cssload-shaft7"></div>	<div class="cssload-shaft8"></div><div class="cssload-shaft9"></div><div class="cssload-shaft10"></div></div></div><div id="addText"></div>'
 var person = {
 		'regid' : $('div')[0].getAttribute('value'),
@@ -8,8 +10,8 @@ var person = {
 	}
 $.ajax(
 {
-	
-	url: "http://172.25.42.125:8000/post/api/attend/",
+
+	url: ip+"/post/api/attend/",
 	type: 'POST',
 	dataType: 'json',
 	data: person,
@@ -42,7 +44,7 @@ var person2 = {
 'mood_passw' : $('div')[3].getAttribute('value')
 }
 $.ajax({
-	url: "http://172.25.42.125:8000/post/api/moodle/",
+	url: ip+"/post/api/moodle/",
 	type: 'POST',
 	dataType: 'json',
 	data: person2,
@@ -59,7 +61,7 @@ $.ajax({
 				rt+="<li><a value='"+data["temp1"][i]+"' class='todo'>"+data["temp"][i]+str+" </a> <div id='addText'></div></li>";
 			}
 			rt+="</ul>"
-			
+
 		$('#event').html(rt);
 
 
@@ -80,14 +82,14 @@ $.ajax({
 
 							}else{
 							rt1+="<p>"+data["date"][i]+"</p><ul><li><a value='"+data["links"][i]+"' class='todo'>"+data['text'][i]+"</a></li>"
-								
+
 }
 	rt1+="</ul>"
 						}
 
 						rt1 +="</ul></ul>"
-						
-					$('#month').html(rt1);	
+
+					$('#month').html(rt1);
 		}
 
 
@@ -111,7 +113,7 @@ var person ={'hr': $(event.target).attr('value'),
 'mood_reg' : $('div')[2].getAttribute('value'),
 'mood_passw' : $('div')[3].getAttribute('value') }
 	$.ajax({
-	url : "http://172.25.42.125:8000/post/api/assign/",
+	url : ip+"/post/api/assign/",
 	type: 'POST',
 	dataType: 'json',
 	data: person,
@@ -122,7 +124,7 @@ var person ={'hr': $(event.target).attr('value'),
 }
 		 $(event.target).append('</table>');
 
-		
+
 
 	},
 	beforeSend : function(){
@@ -143,5 +145,3 @@ var person ={'hr': $(event.target).attr('value'),
 
 }
 );
-
-

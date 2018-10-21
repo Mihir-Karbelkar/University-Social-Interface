@@ -16,9 +16,9 @@ wrong_url = r'http://app.myvitbhopal.ac.in/corecampus/index.php?errormessage=Inv
 cookie = []
 #------/selenium
 
-
+path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver'
 def feedback():
-	br.set_cookiejar(cookie)	
+	br.set_cookiejar(cookie)
 	br.open("http://app.myvitbhopal.ac.in/corecampus/student/subjects/mycontents.php")
 	soup = br.get_current_page()
 	matter = soup.findAll('a',{'href' : re.compile('^teachplan_rating.php')})
@@ -39,7 +39,8 @@ def attendance(username,password):
 	opt.add_argument("--incognito")
 	prefs = {"profile.managed_default_content_settings.images":2,"profile.managed_default_content_settings.stylesheet":2}
 	opt.add_experimental_option("prefs",prefs)
-	driver = webdriver.Chrome(options=opt)
+
+	driver = webdriver.Chrome(executable_path=path,options=opt)
 	cookie = driver.get_cookies()
 
 	driver.get('http://app.myvitbhopal.ac.in/corecampus/index.php')
@@ -52,8 +53,8 @@ def attendance(username,password):
 	driver.find_element_by_name('userid').send_keys(username)
 	driver.find_element_by_name('pass_word').send_keys(password)
 	driver.find_element_by_class_name('btn_img').click()
-	
-		
+
+
 	try:
 		driver.get('http://app.myvitbhopal.ac.in/corecampus/student/topfr.php')
 	except UnexpectedAlertPresentException:
@@ -61,12 +62,12 @@ def attendance(username,password):
 		alert.accept()
 	soup1 = BeautifulSoup(driver.page_source, 'html.parser')
 	name = soup1.find('span',{"class":"userclass"}).text.split(' ')[0]
-	
+
 	if driver.current_url == wrong_url:
 		return "Wrong Credentials!"
 	try:
 		driver.get("http://app.myvitbhopal.ac.in/corecampus/student/attendance/subwise_attendace.php")
-	
+
 	except UnexpectedAlertPresentException:
 		alert = driver.switch_to_alert()
 		alert.accept()
@@ -91,7 +92,7 @@ def attendance(username,password):
 			string['percent']=i.text
 		elif count == 6:
 			string['useless']=i.text
-		count+=1	
+		count+=1
 		if count==7:
 			lis.append(string.copy())
 			count=0
@@ -101,7 +102,5 @@ def attendance(username,password):
 
 
 
-if __name__=="__main__":	
+if __name__=="__main__":
 	feedback()
-
-
