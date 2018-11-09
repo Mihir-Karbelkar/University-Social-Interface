@@ -2,7 +2,9 @@
 $(document).ready(
 
 function(){
-	ip = $(location).attr('href').replace('/post/login/','');
+	var s = $(location).attr('href');
+  ip = s.replace(s.substring(s.indexOf('8000')+4,s.length),'');
+
 	str ='<div class="loader" hidden> <div class="cssload-container">	<div class="cssload-shaft1"></div>	<div class="cssload-shaft2"></div>	<div class="cssload-shaft3"></div>	<div class="cssload-shaft4"></div>	<div class="cssload-shaft5"></div>	<div class="cssload-shaft6"></div>	<div class="cssload-shaft7"></div>	<div class="cssload-shaft8"></div><div class="cssload-shaft9"></div><div class="cssload-shaft10"></div></div></div><div id="addText"></div>'
 var person = {
 		'regid' : regid,

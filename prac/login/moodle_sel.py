@@ -7,12 +7,14 @@ from selenium.webdriver.common.by import By
 import pickle
 import os
 import json
+import requests
 cookie =[]
 path=os.path.dirname(os.path.realpath(__file__))+'/chromedriver'
 def moodle(username, password):
 	global cookie
 	opt = webdriver.ChromeOptions()
 	opt.add_argument("--incognito")
+	opt.add_argument("--headless")
 	prefs = {"profile.managed_default_content_settings.stylesheet":2,"Javascript.enabled": False}
 	opt.add_experimental_option("prefs",prefs)
 	driver = webdriver.Chrome(executable_path=path,options=opt)
@@ -28,7 +30,7 @@ def moodle(username, password):
 		url= driver.current_url
 		driver.find_element_by_name('username').send_keys(username)
 		driver.find_element_by_name('password').send_keys(password)
-		driver.find_element_by_id('loginbtn').click()	
+		driver.find_element_by_id('loginbtn').click()
 	if url==driver.current_url:
 		return "failed"
 
@@ -99,3 +101,24 @@ def assign(string, user , passw):
 
 	driver.close()
 	return {"leftSide":leftSide,"rightSide":rightSide}
+def download(user,passw,course):
+	opt = webdriver.ChromeOptions()
+	opt.add_argument("--incognito")
+	prefs = {"profile.managed_default_content_settings.stylesheet":2}
+	opt.add_experimental_option("prefs",prefs)
+	driver = webdriver.Chrome(executable_path=path,options=opt)
+
+	driver.get('http://moodle.vitbhopal.ac.in/login/index.php')
+
+	url= driver.current_url
+	driver.find_element_by_name('username').send_keys(username)
+	driver.find_element_by_name('password').send_keys(password)
+	driver.find_element_by_id('loginbtn').click()
+def mood_verify(username,password):
+	INVALID ='Invalid login, please try again'
+	url = 'http://moodle.vitbhopal.ac.in/login/index.php'
+	resp = requests.post('http://moodle.vitbhopal.ac.in/login/index.php',{'username':username,'password':password})
+	if resp.text.find(INVALID)==-1 and url!=resp.url:
+		return True
+	else:
+		return False
