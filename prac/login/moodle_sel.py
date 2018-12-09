@@ -7,14 +7,21 @@ from selenium.webdriver.common.by import By
 import pickle
 import os
 import json
+from sys import platform
+
 import requests
 cookie =[]
-path=os.path.dirname(os.path.realpath(__file__))+'/chromedriver'
+path=""
+if platform=="linux" or platform=="linux2":
+	path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver_linux64/chromedriver'
+elif platform=="win32":
+	path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver_win32/chromedriver.exe'
+elif platform=='darwin':
+	path = os.path.dirname(os.path.realpath(__file__))+'/chromedriver_mac64/chromedriver'
 def moodle(username, password):
 	global cookie
 	opt = webdriver.ChromeOptions()
 	opt.add_argument("--incognito")
-	opt.add_argument("--headless")
 	prefs = {"profile.managed_default_content_settings.stylesheet":2,"Javascript.enabled": False}
 	opt.add_experimental_option("prefs",prefs)
 	driver = webdriver.Chrome(executable_path=path,options=opt)
