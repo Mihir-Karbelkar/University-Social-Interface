@@ -44,7 +44,6 @@ def attendance(username,password):
 	global cookie
 	opt = webdriver.ChromeOptions()
 	opt.add_argument("--incognito")
-	opt.add_argument("--headless")
 
 	prefs = {"profile.managed_default_content_settings.images":2,"profile.managed_default_content_settings.stylesheet":2}
 	opt.add_experimental_option("prefs",prefs)

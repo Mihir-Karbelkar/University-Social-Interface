@@ -2,78 +2,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title></title>
-    <style type="text/css">
-
-      .container{
-      margin-top: 2%;
-      }
-      html{
-        height: 100%;
-      }
-      body{
-        height: 100%;
-        margin: 0;
-    background: linear-gradient(45deg, #49a09d, #5f2c82);
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: sans-serif;
-    font-weight: 100;
-      }
-      ::-webkit-input-placeholder {
-        text-align: center;
-      }
-      :-moz-placeholder { /* Firefox 18- */
-     text-align: center;
-  }
-
-  ::-moz-placeholder {  /* Firefox 19+ */
-     text-align: center;
-  }
-
-  :-ms-input-placeholder {
-     text-align: center;
-  }
-  div{
-    margin-top: 1.5%;
-    margin-bottom: 1.5%;
-  }
-      input{
-        border-radius: 25px;
-        width : 40%;
-        height: 25px;
-
-      }
-      input[type$="submit"]{
-        margin-top:0;
-        width: 20%;
-      }
-
-      .title{
-        color: rgb(245,235,245);
-      text-align:  center;
-      }
-      @media screen and (max-width: 900px){
-        input{
-        border-radius: 25px;
-        width : 60%;
-        height: 25px;
-
-      }
-      input[type$="submit"]{
-        width: 30%;
-      }
-      .title{
-        color: rgb(245,235,245);
-      text-align:  center;
-      }
-      body,html{
-        height: 100%;
-      }
-      }
-
-    </style>
+  <link rel="stylesheet" type="text/css" href="{% static "signin.css" %}"
     <script type="text/javascript">
       var check = '{{  incorrect  }}';
     </script>
@@ -90,7 +22,7 @@
   	</div>
   	<div></div>
 <div class="container" align="center">
-
+<img src="{% static "avatar1.png" %}" class="avatar">
 <form class=""  method="post">
   {% csrf_token %}
   <div>
@@ -102,10 +34,13 @@
 <div>
       {{ form.password }}
 </div>
-    <input type="submit" name="submit" value="Submit">
+    <input type="submit" name="submit" value="Submit" >
 </form>
-<p>OR</p>
-<input type="button" name="register" value="Register" >
+<p style="color:white;font-size:150%;">
+
+  OR
+</p>
+<input type="button" name="register" value="Register"  >
 </div>
 
   </body>
