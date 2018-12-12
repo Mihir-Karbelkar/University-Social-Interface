@@ -109,17 +109,20 @@ $.ajax({
 
 	$('#event').on('click','a',
 function(event){
+	console.log('success:  '+ip)
+	console.log()
 			$(event.target).find('table').remove();
 			console.log($(event.target).find('table'));
 var person ={'hr': $(event.target).attr('value'),
-'mood_reg' : $('div')[2].getAttribute('value'),
-'mood_passw' : $('div')[3].getAttribute('value') }
+'mood_reg' : mood_reg,
+'mood_passw' : mood_passw}
 	$.ajax({
 	url : ip+"/post/api/assign/",
 	type: 'POST',
 	dataType: 'json',
 	data: person,
 	success: function(data, textStatus, xhr){
+		console.log('success:  '+ip)
 		$(event.target).append('<table>');
 		for(i=0, len = data["leftSide"].length; i<len;i++){
 			$(event.target).children('table').append('<tr><td>'+data['leftSide'][i]+'</td><td>'+data["rightSide"][i]+'</td></tr>');
@@ -141,7 +144,16 @@ var person ={'hr': $(event.target).attr('value'),
 });
 
 }
-)
+);
+
+$('#event').mouseenter(function(event){
+$(event.target).css({'text-decoration':'underline wavy blue'});
+
+});
+$('#event').mouseout(function(event){
+$(event.target).css({'text-decoration':'none'});
+
+});
 
 
 

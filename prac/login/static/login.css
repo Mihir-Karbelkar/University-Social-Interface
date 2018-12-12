@@ -5,7 +5,7 @@ a{
   color: white;
 }
 body{
-  background-image: linear-gradient(45deg, #49a09d, #5f2c82);
+  background-image: url("back.jpg");/*linear-gradient(45deg, #49a09d, #5f2c82);*/
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -28,7 +28,7 @@ table,th,td{
 }
 .cent{
   text-align: center;
-  
+
 }
 table{
   margin-left: auto;
@@ -44,7 +44,7 @@ table{
      html,body{
       height: 100%;
      }
- 
+
 
     }
 

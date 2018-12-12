@@ -33,7 +33,7 @@ def signin(request):
         if form.is_valid():
             data = form.cleaned_data
             if User.objects.filter(username=data['username']) and User.objects.filter(password=data['password']):
-                print('done')
+                print(User._meta.db_table)
                 user = User.objects.filter(username=data['username'])[0]
                 request.session['regid']=user.regid
                 request.session['passw']=user.passw

@@ -44,7 +44,6 @@ def attendance(username,password):
 	global cookie
 	opt = webdriver.ChromeOptions()
 	opt.add_argument("--incognito")
-	opt.add_argument("--headless")
 
 	prefs = {"profile.managed_default_content_settings.images":2,"profile.managed_default_content_settings.stylesheet":2}
 	opt.add_experimental_option("prefs",prefs)
@@ -55,7 +54,7 @@ def attendance(username,password):
 	driver.get('http://app.myvitbhopal.ac.in/corecampus/index.php')
 	if "ERR_EMPTY_RESPONSE" in driver.page_source:
 		driver.refresh()
-	soup = BeautifulSoup(driver.page_source, 'html.parser')
+	soup = BeautifulSoup(driver.page_source, 'html.parser') 
 
 	if soup.find('div', {"class":"error-code"}) :
 		return "Error code"
@@ -111,7 +110,6 @@ def attendance(username,password):
 def verify(username, password):
 		opt = webdriver.ChromeOptions()
 		opt.add_argument("--incognito")
-		opt.add_argument("--headless")
 		prefs = {"profile.managed_default_content_settings.images":2,"profile.managed_default_content_settings.stylesheet":2}
 		opt.add_experimental_option("prefs",prefs)
 

@@ -1,7 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/static/landing.css">
+	<link rel="stylesheet" type="text/css" href="{% static "landing.css"%}">
+	<link rel="stylesheet" type="text/css" href="{% static "PageTransitions/css/animations.css"%}">
+	<link rel="stylesheet" type="text/css" href="{% static "PageTransitions/css/component.css"%}">
+	<link rel="stylesheet" type="text/css" href="{% static "PageTransitions/css/default.css"%}">
+	<link rel="stylesheet" type="text/css" href="{% static "PageTransitions/css/multilevelmenu.css"%}">
+
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<title>Welcome!</title>
 </head>
@@ -11,11 +17,38 @@
 		<p class="next" onclick="go()">>></p>
 </div>
 </body>
+<div class="pt-page pt-page-1 pt-page-current">
+	<h1>Hello</h1>
+</div>
+<div class="pt-page pt-page-2">
+	<h1>Hey</h1>
+</div>
+<div class="pt-page pt-page-3">
+	<h1>Hello</h1>
+</div>
+<div class="pt-page pt-page-4">
+	<h1>Hello</h1>
+</div>
+<div class="pt-triggers">
+<button type="button" name="next" class="pt-touch-button" id='next' >Next</button>
+<button type="button" name="next" class="pt-touch-button" id='previous' >Previous</button>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <script type="text/javascript">
 	function go() {
 		// body...
 		window.location["href"] = window.location["href"]+"post/signin";
 	}
+
+</script>
+
+<script type="text/javascript" src="{% static "PageTransitions/js/modernizr.custom.js" %}">
+</script>
+<script type="text/javascript" src="{% static "PageTransitions/js/jquery.dlmenu.js" %}">
+</script>
+<script type="text/javascript" src="{% static "landing.js" %}">
 </script>
 </html>
