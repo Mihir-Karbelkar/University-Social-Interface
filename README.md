@@ -1,5 +1,5 @@
 Step 1: 
-	git clone https://fauxwizard@bitbucket.org/fauxwizard/universal-social-interface.git usi
+	git clone https://github.com/Mihir-Karbelkar/University-Social-Interface.git usi
 	
 Step 2:
 	create a virtual env 
