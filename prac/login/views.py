@@ -9,6 +9,10 @@ from .moodle_sel import moodle, assign, mood_verify
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import User
+from datetime import datetime
+import glob
+import random
+import os
 # Create your views here.
 
 
@@ -16,30 +20,67 @@ def index(request):
     return render(request, 'landing.html')
 def login(request):
 
-        user = User(username=request.session['username'],
+        user = User(username=request.session['username'].lower(),
                     password=request.session['password'],
                     regid = request.session['regid'],
                     passw = request.session['passw'],
                     mood_reg = request.session['mood_reg'],
                     mood_passw = request.session['mood_passw'],
                      )
+        hour = datetime.now().hour
+        name = []
+        if hour >=6 and hour <12:
+            loc = glob.glob('static/site/morning*.jpg')
+        elif 12 <= hour <17:
+            loc = glob.glob('static/site/afternoon*.jpg')
+        elif 17 <= hour <=20:
+            loc = glob.glob('static/site/evening*.jpg')
+        elif 20 <= hour <=24:
+            loc = glob.glob('static/site/night*.jpg')
+        elif 0 <= hour <=6:
+            loc = glob.glob('static/site/night*.jpg')
+        print(loc)
+        loc = random.choice(loc)
+        print(location)
         if user not in User.objects.all():
             user.save()
-        return HttpResponse(render(request, 'login.html'))
+        return HttpResponse(render(request, 'login.html',{'location',loc}))
 def signin(request):
     incorrect = False
+    hour = datetime.now().hour
+    loc = []
+    hour = 6
+    if hour >=6 and hour <12:
+        loc = glob.glob('login/static/site/morning*.jpg')
+    elif 12 <= hour <17:
+
+        loc = glob.glob('login/static/site/morning*.jpg')
+
+    elif 17 <= hour <=20:
+        loc = glob.glob('login/static/site/evening*.jpg')
+    elif 20 <= hour <=24:
+        loc = glob.glob('login/static/site/night*.jpg')
+        print('hello', hour)
+    elif 0 <= hour <=6:
+        loc = glob.glob('login/static/site/night*.jpg')
+    else:
+        loc = glob.glob('*')
+
+
+    loc = random.choice(loc)
+    print(hour, loc)
     if request.method == 'POST':
         form = SignIn(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            if User.objects.filter(username=data['username']) and User.objects.filter(password=data['password']):
+            if User.objects.filter(username=data['username'].lower()) and User.objects.filter(password=data['password']):
                 print(User._meta.db_table)
-                user = User.objects.filter(username=data['username'])[0]
+                user = User.objects.filter(username=data['username'].lower())[0]
                 request.session['regid']=user.regid
                 request.session['passw']=user.passw
                 request.session['mood_reg']=user.mood_reg
                 request.session['mood_passw']=user.mood_passw
-                return render(request,'login.html')
+                return render(request,'login.html', {'location': os.path.basename(loc)})
             else:
                 incorrect = True
     else:
@@ -112,7 +153,7 @@ def verify_erp(request):
 def check_user(request):
     print(User.objects.all(), request.POST['username'])
     if request.method == 'POST':
-        if User.objects.filter(username=request.POST['username']):
+        if User.objects.filter(username=request.POST['username'].lower()):
             return JsonResponse({'match':True}, safe=False)
         else:
             return JsonResponse({'match':False}, safe=False)

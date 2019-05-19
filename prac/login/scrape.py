@@ -54,13 +54,13 @@ def attendance(username,password):
 	driver.get('http://app.myvitbhopal.ac.in/corecampus/index.php')
 	if "ERR_EMPTY_RESPONSE" in driver.page_source:
 		driver.refresh()
-	soup = BeautifulSoup(driver.page_source, 'html.parser') 
+	soup = BeautifulSoup(driver.page_source, 'html.parser')
 
 	if soup.find('div', {"class":"error-code"}) :
 		return "Error code"
 	driver.find_element_by_name('userid').send_keys(username)
 	driver.find_element_by_name('pass_word').send_keys(password)
-	driver.find_element_by_class_name('btn_img').click()
+	driver.find_element_by_css_selector('button[value="Submit"]').click()
 
 
 	try:
@@ -85,26 +85,27 @@ def attendance(username,password):
 	lis = list()
 	count=0
 	string={}
-	for i in matter.findAll('td'):
-		if count ==0:
-			string['id']=i.text
-		elif count == 1:
-			string['code']=i.text
-		elif count == 2:
-			string['subject']=i.text
-		elif count == 3:
-			string['credit']=i.text
-		elif count == 4:
-			string['total']=i.text
-		elif count == 5:
-			string['percent']=i.text
-		elif count == 6:
-			string['useless']=i.text
-		count+=1
-		if count==7:
-			lis.append(string.copy())
-			count=0
+	index_list = []
+	columns = ["Sr.No", "Course Code", "Course Title", "Course Credit",
+	 "Total Attended/Total Conducted", "Percentage"]
+	column = ["id", "code", "subject", "credit", "total","percent"]
+	headings = matter.findAll('th')
+
+	for i in range(len(headings)):
+		if headings[i].text in columns:
+			index_list.append(i)
+	print(index_list)
+	table = matter.findAll('tr')[1:]
+	for j in table:
+		li = j.findAll('td')
+		print(li)
+		index = 0
+		for i in index_list:
+			string[column[index]] = li[i].text
+			index+=1
+		lis.append(string.copy())
 	driver.close()
+	print(lis, index_list)
 	return {"lis":lis,"name":name}
 
 def verify(username, password):
@@ -139,4 +140,4 @@ def verify(username, password):
 			return False
 
 if __name__=="__main__":
-	print(verify('17bce10023','@VITmihir6999'))
+	print(verify('17bce10023',''))

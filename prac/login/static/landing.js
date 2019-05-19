@@ -12,6 +12,15 @@ $(document).ready(
       }
 }
     );
+    $('#next').click(function(){
+      var s = $(location).attr('href');
+      ip = s.replace(s.substring(s.indexOf('8000')+4,s.length),'');
+
+      window.location.replace('post/signin');
+
+    });
+  
+
     $('#previous').click(
       function(){
         if($('.pt-page-current').prev().attr('class').indexOf('pt-page')<0){

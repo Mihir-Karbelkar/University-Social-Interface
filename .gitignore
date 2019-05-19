@@ -1,0 +1,10 @@
+.env
+prac/pyvenv.cfg
+prac/login/data
+prac/login/migrations/
+prac/clientkeystore
+prac/*.sqlite3
+env
+.sqlite3
+*/*/__pycache__/*
+.vscode/

@@ -73,6 +73,7 @@ $.ajax({
 
         if(data['STATUS']==true){
           erp_verify=true;
+          $('#verifyerp').attr('disabled','true')
           if(mood_verify==true)
             $('input')[10].disabled=false;
           alert('Confirmed');
@@ -106,6 +107,8 @@ $.ajax({
 
         if(data['STATUS']==true){
           mood_verify=true;
+          $('#verifymood').attr('disabled','true')
+
           if(erp_verify==true)
             $('input')[10].disabled=false;
           alert('Confirmed');
