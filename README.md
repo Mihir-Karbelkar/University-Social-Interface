@@ -5,10 +5,10 @@ Step 2:
 	create a virtual env 
 
 Step 3:
-	run pip3 install -r req.txt
+	change directory to prac
 
 Step 4:
-	change directory to prac
+	run pip3 install -r req.txt
 
 Step 5:
 	run "python3 manage.py runserver" on unix
